@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "QL Mã Hàng";
+    Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
+}
+
+
+<h4>Quản lý Mã Hàng</h4>
+<hr />
+
+<div class="table-responsive">
+    <table id="tbProducts" width="100%" class="table striped highlight centered"></table>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content" style=" padding-bottom:0">
+        <h4>Thông tin Mã Hàng</h4>
+        <hr />
+        <div class="row" style=" margin-bottom:0">
+            <div class="col input-field m6">
+                <input class="" type="text" id='txtname' />
+                <label for="txtname">Tên Mã Hàng</label>
+            </div>
+            <div class="col input-field m2">
+                <input class="" type="text" id='txtTGCT' />
+                <label for="txtTGCT">TG chế tạo(s)</label>
+            </div>
+            <div class="col input-field m2">
+                <input class="" type="number" id='txtDG' />
+                <label for="txtDG">Đơn giá</label>
+            </div>
+            <div class="col input-field m2">
+                <input class="" type="number" id='txtDGCM' />
+                <label for="txtDGCM">Đơn giá CM</label>
+            </div>
+            <div class="col input-field m12">
+                <textarea class="materialize-textarea" id='txtNote'></textarea>
+                <label for="txtNote">Ghi chú</label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="modal-footer">
+        <button id="btnSave" class=" waves-light btn ">Lưu lại</button>
+        <button id="btnCancel" class="modal-close  grey btn ">Hủy bỏ</button>
+    </div>
+</div>
+
+ 
+<script src="~/Scripts/App/Product/Product.js"></script>
+<script>
+
+    var product = new GPRO.Product();
+    product.Init();
+    function Edit(Id) {
+        product.Edit(Id);
+    }
+
+    function Delete(Id) {
+        product.Delete(Id);
+    }
+</script>
+
