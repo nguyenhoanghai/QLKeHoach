@@ -1,5 +1,6 @@
 ﻿using PMS.Business;
 using PMS.Data;
+using QLKeHoach.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace QLKeHoach.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController :  Controller
     {
         public ActionResult Index()
         {
@@ -17,9 +18,8 @@ namespace QLKeHoach.Controllers
 
         [HttpPost]
         public JsonResult Gets(int FloorId, int IsAll)
-        {
-            return Json(BLLCommodity.Gets(FloorId, IsAll));
-            // return Json("");
+        { 
+            return Json(BLLCommodity.GetAll(FloorId, IsAll)); 
         }
 
         [HttpPost]

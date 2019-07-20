@@ -18,6 +18,9 @@
     <script src="~/Scripts/cookie.js"></script>
     <script src="~/Scripts/materialize.min.js"></script>
     <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/App/Common-App.js"></script>
+
+    <script src="~/Scripts/moment.min.js"></script>
 </head>
 <body>
     <nav class="blue darken-3">
@@ -26,13 +29,14 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
                     <a class="dropdown-trigger" href="#!" data-target="dropdown1">
-                        LCD
+                        Danh mục
                         <i class="material-icons right">arrow_drop_down</i>
                     </a>
                     <ul id="dropdown1" class="dropdown-content">
-                        @*<li>@Html.ActionLink("LCD cắt (SH)", "Index", "InsertProductivity")</li>*@
-                        @*<li><a target="_blank" href="/Productivity/LCDTongHopN_Partial">LCD tổng hợp (SH)</a></li>*@
-                        <li>@Html.ActionLink("Danh sách LCD", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Mã hàng", "Index", "Product")</li>
+                        <li>@Html.ActionLink("Màu", "Index", "Color")</li>
+                        <li>@Html.ActionLink("Size", "Index", "Size")</li>
+                        <li>@Html.ActionLink("Khách hàng", "Index", "Customer")</li>
                     </ul>
                 </li>
                 <li>

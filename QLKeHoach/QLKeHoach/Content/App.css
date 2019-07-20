@@ -77,3 +77,26 @@ i.icon-edit {
     .dataTables_length .input-field .select-dropdown {
         text-align: center
     }
+
+table thead tr th {
+    /*border: 1px solid #ccc !important;*/
+    color: blue;
+    border-bottom-color:blue !important
+}
+
+.action-box {
+    width: 50px !important
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 0 !important
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+    padding: 10px 5px !important
+}
+
+.modal-small {
+    width: 35% !important
+}

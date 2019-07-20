@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QLKeHoach.Data
+namespace QLKeHoach.Data.Model
 {
-    public class Class1
+   public class ReceptModel : P_Reception
     {
     }
 }

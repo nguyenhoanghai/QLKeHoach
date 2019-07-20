@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GproPlanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="P_Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" />
+    <Property Name="OwnerName" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedUserId" Type="int" />
+    <Property Name="UpdatedUserId" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="DeletedUserId" Type="int" />
+    <Property Name="DeletedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="P_ReceptDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReceiptId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="ColorId" Type="int" Nullable="false" />
+    <Property Name="SizeId" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedUserId" Type="int" />
+    <Property Name="UpdatedUserId" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="DeletedUserId" Type="int" />
+    <Property Name="DeletedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="P_Reception">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedUserId" Type="int" />
+    <Property Name="UpdatedUserId" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="DeletedUserId" Type="int" />
+    <Property Name="DeletedDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_P_ReceptDetail_P_Reception">
+    <End Role="P_Reception" Type="Self.P_Reception" Multiplicity="1" />
+    <End Role="P_ReceptDetail" Type="Self.P_ReceptDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="P_Reception">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="P_ReceptDetail">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_P_Reception_P_Customer">
+    <End Role="P_Customer" Type="Self.P_Customer" Multiplicity="1" />
+    <End Role="P_Reception" Type="Self.P_Reception" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="P_Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="P_Reception">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GproPlanModelStoreContainer">
+    <EntitySet Name="P_Customer" EntityType="Self.P_Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="P_ReceptDetail" EntityType="Self.P_ReceptDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="P_Reception" EntityType="Self.P_Reception" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_P_ReceptDetail_P_Reception" Association="Self.FK_P_ReceptDetail_P_Reception">
+      <End Role="P_Reception" EntitySet="P_Reception" />
+      <End Role="P_ReceptDetail" EntitySet="P_ReceptDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_P_Reception_P_Customer" Association="Self.FK_P_Reception_P_Customer">
+      <End Role="P_Customer" EntitySet="P_Customer" />
+      <End Role="P_Reception" EntitySet="P_Reception" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

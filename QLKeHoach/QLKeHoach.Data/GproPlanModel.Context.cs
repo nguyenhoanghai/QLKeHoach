@@ -13,10 +13,10 @@ namespace QLKeHoach.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PMS_BaseEntities : DbContext
+    public partial class GproPlanEntities : DbContext
     {
-        public PMS_BaseEntities()
-            : base("name=PMS_BaseEntities")
+        public GproPlanEntities()
+            : base("name=GproPlanEntities")
         {
         }
     
@@ -25,5 +25,8 @@ namespace QLKeHoach.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<P_Customer> P_Customer { get; set; }
+        public DbSet<P_ReceptDetail> P_ReceptDetail { get; set; }
+        public DbSet<P_Reception> P_Reception { get; set; }
     }
 }

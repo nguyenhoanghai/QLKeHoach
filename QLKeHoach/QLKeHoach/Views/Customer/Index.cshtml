@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "QL Khách hàng";
+    Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
+}
+
+<h4>Quản lý khách hàng</h4>
+<hr />
+
+<div class="table-responsive">
+    <table id="tbCustomers" width="100%" class=" table striped highlight "></table>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content" style=" padding-bottom:0">
+        <h4>Thông tin khách hàng</h4>
+        <hr />
+        <div class="row" style=" margin-bottom:0">
+            <div class="col input-field m6">
+                <input class="" type="text" id='txtcode' />
+                <label for="txtcode">Mã khách hàng</label>
+            </div>
+            <div class="col input-field m6">
+                <input class="" type="text" id='txtname' />
+                <label for="txtname">Tên khách hàng</label>
+            </div>
+            <div class="col input-field m6">
+                <input class="" type="tel" id='txtPhone' />
+                <label for="txtPhone">Số điện thoại</label>
+            </div>
+            <div class="col input-field m6">
+                <input class="" type="text" id='txtOwner' />
+                <label for="txtOwner">Người đại diện</label>
+            </div> 
+            <div class="col input-field m12">
+                <textarea class="materialize-textarea" id='txtAddress'></textarea>
+                <label for="txtAddress">Địa chỉ</label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="modal-footer">
+        <button id="btnSave" class=" waves-light btn ">Lưu lại</button>
+        <button id="btnCancel" class="modal-close  grey btn ">Hủy bỏ</button>
+    </div>
+</div>
+
+
+<script src="~/Scripts/App/Customer/Customer.js"></script>
+<script>
+
+    var Customer = new GPRO.Customer();
+    Customer.Init();
+    function Edit(Id) {
+        Customer.Edit(Id);
+    }
+
+    function Delete(Id) {
+        Customer.Delete(Id);
+    }
+</script>
+

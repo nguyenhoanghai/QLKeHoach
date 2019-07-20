@@ -8,3 +8,6 @@ E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Debug\QLKeHoach.Data.dll.
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Debug\EntityFramework.dll
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Debug\EntityFramework.xml
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\obj\Debug\QLKeHoach.Data.csproj.CopyComplete
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Debug\PMS.Business.dll
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Debug\PMS.Data.dll
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Debug\GPRO.Ultilities.dll

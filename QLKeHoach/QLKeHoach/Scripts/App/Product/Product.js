@@ -20,7 +20,7 @@ GPRO.namespace('Product');
 GPRO.Product = function () {
     var Global = {
         UrlAction: {
-            Gets: '/Product/Gets',
+            Gets: 'Product/Gets',
             Save: '/Product/Save',
             Delete: '/Product/Delete'
         },
@@ -92,22 +92,28 @@ GPRO.Product = function () {
             "responsive": true,
             "oLanguage": {
                 "sSearch": "Bộ lọc"
-            },
+            }, 
             "columnDefs":
                 [
                     {
-                        "targets": [5],
+                        "targets": [6], 
+                        "orderable": false  
+                    },
+                    {
+                        "targets": [7],
                         "visible": true,
                         "searchable": false,
                         "orderable": false,
-                        "width": "150px"
+                        className: "action-box"
                     }],
 
             "columns": [
                 { "data": "TenSanPham", "title": "Tên sản phẩm" },
                 { "data": "DonGia", "title": "Đơn giá " },
                 { "data": "DonGiaCM", "title": "Đơn giá CM" },
+                { "data": "DonGiaCat", "title": "Đơn giá cắt" },
                 { "data": "ProductionTime", "title": "TG chế tạo" },
+                { "data": "MaKhachHang", "title": "Mã khách hàng" },
                 { "data": "DinhNghia", "title": "Ghi chú" },
                 {
                     "render": function (data, type, full, meta) {
@@ -151,7 +157,9 @@ GPRO.Product = function () {
         $('#txtDG').val(product.DonGia);
         $('#txtDGCM').val(product.DonGiaCM);
         $('#txtNote').val(product.DinhNghia);
-        $('#txtTGCT').val(product.ProductionTime);
+        $('#txtMKH').val(product.MaKhachHang);
+        $('#txtNote').val(product.DinhNghia);
+        $('#txtDGC').val(product.DonGiaCat);
         $('#' + Global.Element.popupId).modal()[0].M_Modal.options.dismissible = false;
         $('#' + Global.Element.popupId).modal('open');
         M.updateTextFields();
@@ -170,7 +178,9 @@ GPRO.Product = function () {
                     DonGia: parseFloat($('#txtDG').val()),
                     DonGiaCM: parseFloat($('#txtDGCM').val()),
                     ProductionTime: parseFloat($('#txtTGCT').val()),
-                    DinhNghia: $('#txtNote').val()
+                    DinhNghia: $('#txtNote').val(),
+                    MaKhachHang: $('#txtMKH').val(),
+                    DonGiaCat: $('#txtDGC').val()
                 }
                 $.ajax({
                     url: Global.UrlAction.Save,
@@ -197,6 +207,8 @@ GPRO.Product = function () {
             $('#txtDGCM').val(1);
             $('#txtNote').val('');
             $('#txtTGCT').val(1);
+             $('#txtMKH').val('');
+             $('#txtDGC').val(1);
             Global.Data.Id = 0;
             Global.Data.selectedProduct = null;
             $("#" + Global.Element.popupId).modal("close");
