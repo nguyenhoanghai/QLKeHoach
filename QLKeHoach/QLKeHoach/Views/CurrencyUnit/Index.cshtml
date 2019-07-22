@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Đvị tiền tệ";
+    Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
+}
+
+<h4>Quản lý đơn vị tiền tệ</h4>
+<hr />
+
+<div class="table-responsive">
+    <table id="tbCurrencyUnits" width="100%" class=" table striped highlight "></table>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal modal-small">
+    <div class="modal-content" style=" padding-bottom:0">
+        <h4>Thông tin đơn vị tiền tệ</h4>
+        <hr />
+        <div class="row" style=" margin-bottom:0">
+            <div class="col input-field m12">
+                <input class="" type="text" id='txtcode' />
+                <label for="txtcode">Mã đơn vị tiền tệ</label>
+            </div> 
+            <div class="col input-field m12">
+                <textarea class="materialize-textarea" id='txtNote'></textarea>
+                <label for="txtNote">Ghi chú</label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="modal-footer">
+        <button id="btnSave" class=" waves-light btn ">Lưu lại</button>
+        <button id="btnCancel" class="modal-close  grey btn ">Hủy bỏ</button>
+    </div>
+</div>
+
+
+<script src="~/Scripts/App/CurrencyUnit/CurrencyUnit.js"></script>
+<script>
+
+    var CurrencyUnit = new GPRO.CurrencyUnit();
+    CurrencyUnit.Init();
+    function Edit(Id) {
+        CurrencyUnit.Edit(Id);
+    }
+
+    function Delete(Id) {
+        CurrencyUnit.Delete(Id);
+    }
+</script>

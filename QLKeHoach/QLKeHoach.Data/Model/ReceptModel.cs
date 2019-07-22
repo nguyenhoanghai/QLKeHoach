@@ -8,5 +8,13 @@ namespace QLKeHoach.Data.Model
 {
    public class ReceptModel : P_Reception
     {
+        public string CusName { get; set; }
+        public double Total { get; set; }
+        public string CuUnitName   { get; set; }
+        public IEnumerable<ReceiptDetailModel> Details { get; set; }
+        public ReceptModel()
+        {
+            Details = new List<ReceiptDetailModel>();
+        }
     }
 }

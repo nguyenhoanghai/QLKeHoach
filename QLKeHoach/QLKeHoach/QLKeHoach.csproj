@@ -125,6 +125,8 @@
     <Content Include="images\sort_asc.png" />
     <Content Include="images\sort_both.png" />
     <Content Include="images\sort_desc.png" />
+    <Content Include="Scripts\App\CurrencyUnit\CurrencyUnit.js" />
+    <Content Include="Scripts\App\Receipt\Receipt.js" />
     <Content Include="Scripts\App\Color\Color.js" />
     <Content Include="Scripts\App\Assignment\Assignment.js" />
     <Content Include="Scripts\App\Common-App.js" />
@@ -154,9 +156,11 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\CurrencyUnitController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Controllers\SizeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -175,6 +179,8 @@
     <Content Include="Views\Size\Index.cshtml" />
     <Content Include="Views\Assignment\Index.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Receipt\Index.cshtml" />
+    <Content Include="Views\CurrencyUnit\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

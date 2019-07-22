@@ -1,4 +1,5 @@
-﻿using PMS.Business.Models;
+﻿using GPRO.Ultilities;
+using PMS.Business.Models;
 using QLKeHoach.Data.Model;
 using System;
 using System.Collections.Generic;
@@ -39,12 +40,16 @@ namespace QLKeHoach.Data.BLL
                                 Id = x.Id,
                                 Code = x.Code,
                                 Name = x.Name,
-                                //OwnerName = x.OwnerName,
-                                //Address = x.Address,
-                                //Phone = x.Phone
+                                CusName = x.P_Customer.Code,
+                                Details = x.P_ReceptDetail.Where(i=>!i.IsDeleted).Select(i=>new ReceiptDetailModel() { Id = 0, ColorId= i.ColorId, ProductId= i.ProductId, SizeId= i.SizeId, Note = i.Note, Quantity = i.Quantity, Price = i.Price }) ,
+                                Total = 0,
+                                CustomerId= x.CustomerId,
+                                CurrencyUnitId = x.CurrencyUnitId,
+                                CuUnitName = x.P_CurrencyUnit.Code ,
+                                ExchangeRate = x.ExchangeRate
                             }).ToList();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                 }
                 return new List<ReceptModel>();
@@ -77,19 +82,22 @@ namespace QLKeHoach.Data.BLL
             var result = new ResponseBase();
             try
             {
-                var db = new GproPlanEntities();
-                var obj = db.P_Reception.FirstOrDefault(x => x.Id == Id);
-                if (obj != null)
+                using (var db = new GproPlanEntities())
                 {
-                    obj.IsDeleted = true;
-                    db.SaveChanges();
-                    result.IsSuccess = true;
-                    result.Messages.Add(new Message() { msg = "Xóa đơn hàng thành công.", Title = "Thông Báo" });
-                }
-                else
-                {
-                    result.IsSuccess = true;
-                    result.Messages.Add(new Message() { msg = "Không tìm thấy thông tin đơn hàng . Xóa đơn hàng thất bại.", Title = "Lỗi CSDL" });
+                    var obj = db.P_Reception.FirstOrDefault(x => x.Id == Id);
+                    if (obj != null)
+                    {
+                        obj.IsDeleted = true;
+                        obj.DeletedDate = DateTime.Now;
+                        db.SaveChanges();
+                        result.IsSuccess = true;
+                        result.Messages.Add(new Message() { msg = "Xóa đơn hàng thành công.", Title = "Thông Báo" });
+                    }
+                    else
+                    {
+                        result.IsSuccess = true;
+                        result.Messages.Add(new Message() { msg = "Không tìm thấy thông tin đơn hàng . Xóa đơn hàng thất bại.", Title = "Lỗi CSDL" });
+                    }
                 }
             }
             catch (Exception)
@@ -99,8 +107,8 @@ namespace QLKeHoach.Data.BLL
             }
             return result;
         }
-
-        public ResponseBase InsertOrUpdate(P_Reception objModel)
+        
+        public ResponseBase InsertOrUpdate(ReceptModel objModel)
         {
             var rs = new ResponseBase();
             using (var db = new GproPlanEntities())
@@ -119,21 +127,49 @@ namespace QLKeHoach.Data.BLL
                     }
                     else
                     {
+                        P_Reception reception;
+                        P_ReceptDetail detail;
                         if (objModel.Id == 0)
                         {
-                            db.P_Reception.Add(objModel);
+                            reception = new P_Reception();
+                            Parse.CopyObject(objModel, ref reception);
+                            reception.CreatedDate = DateTime.Now;
+                            reception.P_ReceptDetail = new List<P_ReceptDetail>();
+
+                            var detailObjs = objModel.Details.ToList();
+                            for (int i = 0; i < detailObjs.Count-1; i++)
+                            {
+                                detail = new P_ReceptDetail();
+                                Parse.CopyObject(detailObjs[i], ref detail); 
+                                detail.P_Reception = reception;
+                                detail.CreatedDate = reception.CreatedDate; 
+                                reception.P_ReceptDetail.Add(detail);
+                            }
+                            db.P_Reception.Add(reception);
                             rs.IsSuccess = true;
                         }
                         else
                         {
-                            var oldObj = db.P_Reception.FirstOrDefault(x => !x.IsDeleted && x.Id == objModel.Id);
-                            if (oldObj != null)
+                            reception = db.P_Reception.FirstOrDefault(x => !x.IsDeleted && x.Id == objModel.Id);
+                            if (reception != null)
                             {
-                                oldObj.Code = objModel.Code;
-                                oldObj.Name = objModel.Name;
-                                //oldObj.Phone = objModel.Phone;
-                                //oldObj.Address = objModel.Address;
-                                //oldObj.OwnerName = objModel.OwnerName;
+                                reception.Code = objModel.Code;
+                                reception.Name = objModel.Name; 
+                                reception.ExchangeRate = objModel.ExchangeRate; 
+                                reception.CurrencyUnitId = objModel.CurrencyUnitId;
+                                reception.CustomerId = objModel.CustomerId;
+                                reception.Note = objModel.Note;
+                                reception.UpdatedDate = DateTime.Now;
+                                db.Database.ExecuteSqlCommand("update P_ReceptDetail set IsDeleted=1 where ReceiptId="+reception.Id);
+                                var detailObjs = objModel.Details.ToList();
+                                for (int i = 0; i < detailObjs.Count - 1; i++)
+                                {
+                                    detail = new P_ReceptDetail();
+                                    Parse.CopyObject(detailObjs[i], ref detail);
+                                    detail.P_Reception = reception;
+                                    detail.CreatedDate = reception.UpdatedDate.Value;
+                                    reception.P_ReceptDetail.Add(detail);
+                                }
                                 rs.IsSuccess = true;
                             }
                             else
@@ -149,14 +185,14 @@ namespace QLKeHoach.Data.BLL
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                 }
             }
             return rs;
         }
 
-        private P_Reception CheckExists(P_Reception objModel, bool isCheckName, GproPlanEntities db)
+        private P_Reception CheckExists(ReceptModel objModel, bool isCheckName, GproPlanEntities db)
         {
             if (isCheckName)
                 return db.P_Reception.FirstOrDefault(x => !x.IsDeleted && x.Id != objModel.Id && x.Name.Trim().Equals(objModel.Name));

@@ -1,0 +1,91 @@
+﻿@using  Newtonsoft.Json
+@{
+    ViewBag.Title = "Index";
+Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
+}
+
+<h4>Quản lý đơn hàng</h4>
+<hr />
+
+<div class="table-responsive">
+    <table id="tbReceipts" width="100%" class=" table striped highlight "></table>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal modal-full">
+    <div class="modal-content" style=" padding-bottom:0">
+        <h4>Thông tin đơn hàng</h4>
+        <hr />
+        <div class="row" style=" margin-bottom:0">
+            <div class="col s4">
+                <div class="col input-field m12">
+                    <input class="" type="text" id='txtcode' />
+                    <label for="txtcode">Mã đơn hàng</label>
+                </div>
+                <div class="col input-field m12">
+                    <input class="" type="text" id='txtname' />
+                    <label for="txtname">Tên đơn hàng</label>
+                </div>
+                <div class="col input-field m12">
+                    <select id='cus-id'></select>
+                    <label for="cus-id">Khách hàng</label>
+                </div>
+                <div class="col input-field m6">
+                    <select id='unit-id'></select>
+                    <label for="unit-id">Đơn vị tiền tệ</label>
+                </div>
+                <div class="col input-field m6">
+                    <input id='rate' value="1" type="number" />
+                    <label for="rate">Tỉ giá</label>
+                </div>
+                <div class="col input-field m12">
+                    <textarea class="materialize-textarea" id='txtNote'></textarea>
+                    <label for="txtNote">Ghi chú</label>
+                </div>
+            </div>
+            <div class="col s8">
+                <table id="detail-table" class="striped highlight table">
+                    <thead>
+                        <tr>
+                            <td>Mã hàng</td>
+                            <td class="number">Màu</td>
+                            <td class="number">Size</td>
+                            <td class="number">Số lượng</td>
+                            <td class="number">Đơn giá</td>
+                            <td>Ghi chú</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="modal-footer">
+        <button id="btnSave" class=" waves-light btn ">Lưu lại</button>
+        <button id="btnCancel" class="modal-close  grey btn ">Hủy bỏ</button>
+    </div>
+</div>
+<datalist id="mahang"></datalist>
+<datalist id="mau"></datalist>
+<datalist id="size"></datalist>
+
+
+<script src="~/Scripts/App/Receipt/Receipt.js"></script>
+<script>
+
+    var Receipt = new GPRO.Receipt();
+    Receipt.GetGlobal().Data.Colors = JSON.parse(' @Html.Raw(JsonConvert.SerializeObject(ViewBag.Colors) ) ');
+    Receipt.GetGlobal().Data.Commodities = JSON.parse(' @Html.Raw(JsonConvert.SerializeObject(ViewBag.Commos) )' );
+    Receipt.GetGlobal().Data.Sizes = JSON.parse(' @Html.Raw(JsonConvert.SerializeObject(ViewBag.Sizes) )' );
+   // console.log(Receipt.GetGlobal().Data.Colors );
+    Receipt.Init();
+    function Edit(Id) {
+        Receipt.Edit(Id);
+    }
+
+    function Delete(Id) {
+        Receipt.Delete(Id);
+    }
+</script>
+

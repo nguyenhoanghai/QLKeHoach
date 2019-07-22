@@ -60,7 +60,8 @@ namespace QLKeHoach.Data
                             select new ModelSelectItem()
                             {
                                 Id = x.Id,
-                                Name = (x.Code + " ( " + x.Name + " )")
+                                Name = x.Name,
+                                Code = x.Code
                             }).ToList();
                 }
                 catch (Exception)
@@ -75,20 +76,22 @@ namespace QLKeHoach.Data
             var result = new ResponseBase();
             try
             {
-                var db = new GproPlanEntities();
-                var obj = db.P_Customer.FirstOrDefault(x => x.Id == Id);
-                if (obj != null)
+                using (var db = new GproPlanEntities())
                 {
-                    obj.IsDeleted = true;
-                    obj.DeletedDate = DateTime.Now;
-                    db.SaveChanges();
-                    result.IsSuccess = true;
-                    result.Messages.Add(new Message() { msg = "Xóa khách hàng thành công.", Title = "Thông Báo" });
-                }
-                else
-                {
-                    result.IsSuccess = true;
-                    result.Messages.Add(new Message() { msg = "Không tìm thấy thông tin khách hàng . Xóa khách hàng thất bại.", Title = "Lỗi CSDL" });
+                    var obj = db.P_Customer.FirstOrDefault(x => x.Id == Id);
+                    if (obj != null)
+                    {
+                        obj.IsDeleted = true;
+                        obj.DeletedDate = DateTime.Now;
+                        db.SaveChanges();
+                        result.IsSuccess = true;
+                        result.Messages.Add(new Message() { msg = "Xóa khách hàng thành công.", Title = "Thông Báo" });
+                    }
+                    else
+                    {
+                        result.IsSuccess = true;
+                        result.Messages.Add(new Message() { msg = "Không tìm thấy thông tin khách hàng . Xóa khách hàng thất bại.", Title = "Lỗi CSDL" });
+                    }
                 }
             }
             catch (Exception)

@@ -12,19 +12,15 @@ namespace QLKeHoach.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class P_Reception
+    public partial class P_CurrencyUnit
     {
-        public P_Reception()
+        public P_CurrencyUnit()
         {
-            this.P_ReceptDetail = new HashSet<P_ReceptDetail>();
+            this.P_Reception = new HashSet<P_Reception>();
         }
     
         public int Id { get; set; }
         public string Code { get; set; }
-        public string Name { get; set; }
-        public int CurrencyUnitId { get; set; }
-        public int CustomerId { get; set; }
-        public double ExchangeRate { get; set; }
         public string Note { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime CreatedDate { get; set; }
@@ -34,8 +30,6 @@ namespace QLKeHoach.Data
         public Nullable<int> DeletedUserId { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
     
-        public virtual P_CurrencyUnit P_CurrencyUnit { get; set; }
-        public virtual P_Customer P_Customer { get; set; }
-        public virtual ICollection<P_ReceptDetail> P_ReceptDetail { get; set; }
+        public virtual ICollection<P_Reception> P_Reception { get; set; }
     }
 }

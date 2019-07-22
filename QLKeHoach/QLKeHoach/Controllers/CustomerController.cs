@@ -16,7 +16,7 @@ namespace QLKeHoach.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetSelects()
+        public JsonResult GetSelect()
         {
             return Json(BLLCustomer.Instance.GetSelects());
         }

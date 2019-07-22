@@ -16,17 +16,17 @@ GPRO.namespace = function () {
     }
     return o;
 }
-GPRO.namespace('Customer');
-GPRO.Customer = function () {
+GPRO.namespace('CurrencyUnit');
+GPRO.CurrencyUnit = function () {
     var Global = {
         UrlAction: {
-            Gets: '/Customer/Gets',
-            Save: '/Customer/Save',
-            Delete: '/Customer/Delete'
+            Gets: '/CurrencyUnit/Gets',
+            Save: '/CurrencyUnit/Save',
+            Delete: '/CurrencyUnit/Delete'
         },
         Data: {
-            Customers: [],
-            selectedCustomer: null,
+            CurrencyUnits: [],
+            selectedCurrencyUnit: null,
             table: null,
             Id: 0
         },
@@ -44,7 +44,7 @@ GPRO.Customer = function () {
     }
 
     this.Delete = function (Id) {
-        if (confirm('Những dữ liệu liên quan đến khách hàng này sẽ bị xóa. Bạn có muốn xóa khách hàng này ?'))
+        if (confirm('Những dữ liệu liên quan đến đơn vị tiền tệ này sẽ bị xóa. Bạn có muốn xóa đơn vị tiền tệ này ?'))
             Delete(Id);
     }
 
@@ -62,19 +62,18 @@ GPRO.Customer = function () {
     function Gets() {
         $.ajax({
             url: Global.UrlAction.Gets,
-            type: 'POST',
-           // data: JSON.stringify({ 'FloorId': 2, 'IsAll': 1 }),
+            type: 'POST', 
             contentType: 'application/json charset=utf-8',
             beforeSend: function () { $('.progress').removeClass('hide'); },
             success: function (objs) {
                 $('.progress').addClass('hide');
                 if (Global.Data.table != null) {
                     Global.Data.table.destroy();
-                    $('#tbCustomers').empty();
+                    $('#tbCurrencyUnits').empty();
                     Global.Data.table = null;
                 }
-                Global.Data.Customers = null;
-                Global.Data.Customers = objs;
+                Global.Data.CurrencyUnits = null;
+                Global.Data.CurrencyUnits = objs;
                 DrawTable(objs);
                 ReDrawFilterAndLengthBoxForGrid(Global.Data.table);
                 $('.table-responsive').show();
@@ -83,7 +82,7 @@ GPRO.Customer = function () {
     }
 
     function DrawTable(objs) {
-        Global.Data.table = $("#tbCustomers").DataTable({
+        Global.Data.table = $("#tbCurrencyUnits").DataTable({
             "filter": true, // this is for disable filter (search box)
             "orderMulti": false, // for disable multiple column at once
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -92,15 +91,19 @@ GPRO.Customer = function () {
             "responsive": true,
             "oLanguage": {
                 "sSearch": "Bộ lọc"
-            }, 
+            },
             "columnDefs":
                 [
                     {
-                        "targets": [4], 
-                        "orderable": false  
+                        "targets": [0],  
+                        width:'150px'
                     },
                     {
-                        "targets": [5],
+                        "targets": [1],
+                        "orderable": false 
+                    },
+                    {
+                        "targets": [2],
                         "visible": true,
                         "searchable": false,
                         "orderable": false,
@@ -108,11 +111,8 @@ GPRO.Customer = function () {
                     }],
 
             "columns": [
-                { "data": "Code", "title": "Mã khách hàng" },
-                { "data": "Name", "title": "Tên khách hàng" },
-                { "data": "Phone", "title": "Số điện thoại" },
-                { "data": "OwnerName", "title": "Người đại diện" }, 
-                { "data": "Address", "title": "Địa chỉ" },
+                { "data": "Code", "title": "Mã đơn vị tiền tệ" }, 
+                { "data": "Note", "title": "Ghi chú" },
                 {
                     "render": function (data, type, full, meta) {
                         return `<i class="material-icons icon-edit  cursor" onClick="Edit(${full.Id})">edit</i> 
@@ -127,7 +127,7 @@ GPRO.Customer = function () {
             $('#' + Global.Element.popupId).modal('open');
             M.updateTextFields();
         });
-        btnAdd.insertBefore('#tbCustomers_filter');
+        btnAdd.insertBefore('#tbCurrencyUnits_filter');
     }
 
     function Delete(Id) {
@@ -145,17 +145,14 @@ GPRO.Customer = function () {
     }
 
     function Edit(Id) {
-        var Customer = $.map(Global.Data.Customers, function (item, i) {
-            if (item.MaSanPham == Id)
+        var CurrencyUnit = $.map(Global.Data.CurrencyUnits, function (item, i) {
+            if (item.Id == Id)
                 return item;
         })[0];
-        Global.Data.selectedCustomer = Customer;
-        Global.Data.Id = Customer.Id;
-        $('#txtname').val(Customer.Name);
-        $('#txtcode').val(Customer.Code);
-        $('#txtPhone').val(Customer.Phone); 
-        $('#txtOwner').val(Customer.OwnerName);
-        $('#txtAddress').val(Customer.Address); 
+        Global.Data.selectedCurrencyUnit = CurrencyUnit;
+        Global.Data.Id = CurrencyUnit.Id;
+        $('#txtcode').val(CurrencyUnit.Code); 
+        $('#txtNote').val(CurrencyUnit.Note); 
         $('#' + Global.Element.popupId).modal()[0].M_Modal.options.dismissible = false;
         $('#' + Global.Element.popupId).modal('open');
         M.updateTextFields();
@@ -170,11 +167,8 @@ GPRO.Customer = function () {
             if (CheckValidate()) {
                 var obj = {
                     Id: Global.Data.Id,
-                    Name: $('#txtname').val(),
-                    Code: $('#txtcode').val(),
-                    Phone: $('#txtPhone').val(), 
-                    Address: $('#txtAddress').val(),
-                    OwnerName: $('#txtOwner').val() 
+                    Code: $('#txtcode').val(), 
+                    Note: $('#txtNote').val()  
                 }
                 $.ajax({
                     url: Global.UrlAction.Save,
@@ -196,40 +190,20 @@ GPRO.Customer = function () {
         });
 
         $('#modal1 #btnCancel').click(function () {
-            $('#txtname').val('');
-            $('#txtcode').val(1);
-            $('#txtPhone').val(1);
-            $('#txtAddress').val('');
-            $('#txtTGCT').val(1);
-             $('#txtOwner').val('');
-             $('#txtDGC').val(1);
+            $('#txtcode').val(''); 
+            $('#txtNote').val(''); 
             Global.Data.Id = 0;
-            Global.Data.selectedCustomer = null;
+            Global.Data.selectedCurrencyUnit = null;
             $("#" + Global.Element.popupId).modal("close");
         });
     }
 
     function CheckValidate() {
-        if ($('#txtname').val().trim() == "") {
-            alert("Nhập tên khách hàng.");
-            $('#txtname').focus();
-            return false;
-        }
-        else if ($('#txtcode').val().trim() == "") {
-            alert("Nhập mã khách hàng.");
+        if ($('#txtcode').val().trim() == "") {
+            alert("Nhập mã đơn vị tiền tệ.");
             $('#txtcode').focus();
             return false;
         } 
-        else if ($('#txtPhone').val().trim() == "") {
-            alert("Nhập số điện thoại.");
-            $('#txtPhone').focus();
-            return false;
-        }  
-        else if ($('#txtOwner').val().trim() == "") {
-            alert("Nhập tên người đại diện.");
-            $('#txtOwner').focus();
-            return false;
-        }  
         return true;
     }
 }

@@ -17,7 +17,7 @@
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="DeletedUserId" Type="Int32" />
     <Property Name="DeletedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="P_Reception" Relationship="Self.FK_P_Reception_P_Customer" FromRole="P_Customer" ToRole="P_Reception" />
+    <NavigationProperty Name="P_Reception" Relationship="GproPlanModel.FK_P_Reception_P_Customer" FromRole="P_Customer" ToRole="P_Reception" />
   </EntityType>
   <EntityType Name="P_ReceptDetail">
     <Key>
@@ -38,16 +38,32 @@
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="DeletedUserId" Type="Int32" />
     <Property Name="DeletedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="P_Reception" Relationship="Self.FK_P_ReceptDetail_P_Reception" FromRole="P_ReceptDetail" ToRole="P_Reception" />
+    <NavigationProperty Name="P_Reception" Relationship="GproPlanModel.FK_P_ReceptDetail_P_Reception" FromRole="P_ReceptDetail" ToRole="P_Reception" />
   </EntityType>
-  <EntityType Name="P_Reception">
+  <EntityContainer Name="GproPlanEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="P_Customer" EntityType="Self.P_Customer" />
+    <EntitySet Name="P_ReceptDetail" EntityType="Self.P_ReceptDetail" />
+    <EntitySet Name="P_CurrencyUnit" EntityType="GproPlanModel.P_CurrencyUnit" />
+    <EntitySet Name="P_Reception" EntityType="GproPlanModel.P_Reception" />
+    <AssociationSet Name="FK_P_Reception_P_CurrencyUnit" Association="GproPlanModel.FK_P_Reception_P_CurrencyUnit">
+      <End Role="P_CurrencyUnit" EntitySet="P_CurrencyUnit" />
+      <End Role="P_Reception" EntitySet="P_Reception" />
+    </AssociationSet>
+    <AssociationSet Name="FK_P_Reception_P_Customer" Association="GproPlanModel.FK_P_Reception_P_Customer">
+      <End Role="P_Customer" EntitySet="P_Customer" />
+      <End Role="P_Reception" EntitySet="P_Reception" />
+    </AssociationSet>
+    <AssociationSet Name="FK_P_ReceptDetail_P_Reception" Association="GproPlanModel.FK_P_ReceptDetail_P_Reception">
+      <End Role="P_Reception" EntitySet="P_Reception" />
+      <End Role="P_ReceptDetail" EntitySet="P_ReceptDetail" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="P_CurrencyUnit">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Code" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -56,12 +72,45 @@
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="DeletedUserId" Type="Int32" />
     <Property Name="DeletedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="P_Customer" Relationship="Self.FK_P_Reception_P_Customer" FromRole="P_Reception" ToRole="P_Customer" />
-    <NavigationProperty Name="P_ReceptDetail" Relationship="Self.FK_P_ReceptDetail_P_Reception" FromRole="P_Reception" ToRole="P_ReceptDetail" />
+    <NavigationProperty Name="P_Reception" Relationship="GproPlanModel.FK_P_Reception_P_CurrencyUnit" FromRole="P_CurrencyUnit" ToRole="P_Reception" />
   </EntityType>
+  <EntityType Name="P_Reception">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CurrencyUnitId" Type="Int32" Nullable="false" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="ExchangeRate" Type="Double" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedUserId" Type="Int32" />
+    <Property Name="UpdatedUserId" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedUserId" Type="Int32" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="P_CurrencyUnit" Relationship="GproPlanModel.FK_P_Reception_P_CurrencyUnit" FromRole="P_Reception" ToRole="P_CurrencyUnit" />
+    <NavigationProperty Name="P_Customer" Relationship="GproPlanModel.FK_P_Reception_P_Customer" FromRole="P_Reception" ToRole="P_Customer" />
+    <NavigationProperty Name="P_ReceptDetail" Relationship="GproPlanModel.FK_P_ReceptDetail_P_Reception" FromRole="P_Reception" ToRole="P_ReceptDetail" />
+  </EntityType>
+  <Association Name="FK_P_Reception_P_CurrencyUnit">
+    <End Type="GproPlanModel.P_CurrencyUnit" Role="P_CurrencyUnit" Multiplicity="1" />
+    <End Type="GproPlanModel.P_Reception" Role="P_Reception" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="P_CurrencyUnit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="P_Reception">
+        <PropertyRef Name="CurrencyUnitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_P_Reception_P_Customer">
-    <End Role="P_Customer" Type="Self.P_Customer" Multiplicity="1" />
-    <End Role="P_Reception" Type="Self.P_Reception" Multiplicity="*" />
+    <End Type="GproPlanModel.P_Customer" Role="P_Customer" Multiplicity="1" />
+    <End Type="GproPlanModel.P_Reception" Role="P_Reception" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="P_Customer">
         <PropertyRef Name="Id" />
@@ -72,8 +121,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_P_ReceptDetail_P_Reception">
-    <End Role="P_Reception" Type="Self.P_Reception" Multiplicity="1" />
-    <End Role="P_ReceptDetail" Type="Self.P_ReceptDetail" Multiplicity="*" />
+    <End Type="GproPlanModel.P_Reception" Role="P_Reception" Multiplicity="1" />
+    <End Type="GproPlanModel.P_ReceptDetail" Role="P_ReceptDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="P_Reception">
         <PropertyRef Name="Id" />
@@ -83,17 +132,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="GproPlanEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="P_Customer" EntityType="Self.P_Customer" />
-    <EntitySet Name="P_ReceptDetail" EntityType="Self.P_ReceptDetail" />
-    <EntitySet Name="P_Reception" EntityType="Self.P_Reception" />
-    <AssociationSet Name="FK_P_Reception_P_Customer" Association="Self.FK_P_Reception_P_Customer">
-      <End Role="P_Customer" EntitySet="P_Customer" />
-      <End Role="P_Reception" EntitySet="P_Reception" />
-    </AssociationSet>
-    <AssociationSet Name="FK_P_ReceptDetail_P_Reception" Association="Self.FK_P_ReceptDetail_P_Reception">
-      <End Role="P_Reception" EntitySet="P_Reception" />
-      <End Role="P_ReceptDetail" EntitySet="P_ReceptDetail" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>

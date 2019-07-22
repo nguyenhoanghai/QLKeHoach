@@ -85,7 +85,7 @@ table thead tr th {
 }
 
 .action-box {
-    width: 50px !important
+    width: 55px !important
 }
 
 .dataTables_wrapper .dataTables_filter input {
@@ -93,10 +93,33 @@ table thead tr th {
 }
 
 table.dataTable thead th,
-table.dataTable thead td {
-    padding: 10px 5px !important
+table.dataTable thead td,
+.table thead th,
+.table thead td {
+    padding: 10px 5px !important;
+    background: green;
+    color: white;
+    font-weight: bold;
+    border-radius: 0
+}
+
+.table td{
+    border:1px solid #ccc
 }
 
 .modal-small {
     width: 35% !important
+}
+
+.modal-full{
+    width:98% !important;
+    top:2% !important;
+    max-height:98% !important
+}
+
+input.number,
+.number{ width:90px !important}
+
+#detail-table tbody td{
+    padding: 0 5px !important
 }

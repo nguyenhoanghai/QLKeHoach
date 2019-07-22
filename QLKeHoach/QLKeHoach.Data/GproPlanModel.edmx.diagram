@@ -7,10 +7,12 @@
       <Diagram DiagramId="0e8cc28eae2e420aa4a7c39f6e07a76e" Name="Diagram1">
         <EntityTypeShape EntityType="GproPlanModel.P_Customer" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GproPlanModel.P_ReceptDetail" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="GproPlanModel.P_Reception" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <AssociationConnector Association="GproPlanModel.FK_P_Reception_P_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="GproPlanModel.FK_P_ReceptDetail_P_Reception" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="GproPlanModel.P_CurrencyUnit" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="GproPlanModel.P_Reception" Width="1.5" PointX="3" PointY="3.25" />
+        <AssociationConnector Association="GproPlanModel.FK_P_Reception_P_CurrencyUnit" />
+        <AssociationConnector Association="GproPlanModel.FK_P_Reception_P_Customer" />
+        <AssociationConnector Association="GproPlanModel.FK_P_ReceptDetail_P_Reception" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

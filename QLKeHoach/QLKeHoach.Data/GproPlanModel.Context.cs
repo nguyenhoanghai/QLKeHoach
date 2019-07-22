@@ -27,6 +27,7 @@ namespace QLKeHoach.Data
     
         public DbSet<P_Customer> P_Customer { get; set; }
         public DbSet<P_ReceptDetail> P_ReceptDetail { get; set; }
+        public DbSet<P_CurrencyUnit> P_CurrencyUnit { get; set; }
         public DbSet<P_Reception> P_Reception { get; set; }
     }
 }

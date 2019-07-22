@@ -37,30 +37,19 @@
                         <li>@Html.ActionLink("Màu", "Index", "Color")</li>
                         <li>@Html.ActionLink("Size", "Index", "Size")</li>
                         <li>@Html.ActionLink("Khách hàng", "Index", "Customer")</li>
+                        <li>@Html.ActionLink("Đơn vị tiền tệ", "Index", "CurrencyUnit")</li>
                     </ul>
                 </li>
                 <li>
                     <a class="dropdown-trigger" href="#!" data-target="dropdown2">
-                        Nhập sản lượng
+                       Kế hoạch
                         <i class="material-icons right">arrow_drop_down</i>
                     </a>
                     <ul id="dropdown2" class="dropdown-content">
-                        <li>@Html.ActionLink("Sản lượng năng suất", "Index", "InsertProductivity")</li>
-                        <li>@Html.ActionLink("Sản lượng công đoạn", "InsertPhaseQuantity", "InsertProductivity")</li>
-                        <li>@Html.ActionLink("Lịch sử công đoạn", "HistoryPhaseQuantity", "InsertProductivity")</li>
+                        <li>@Html.ActionLink("Đơn hàng", "Index", "Receipt")</li> 
                     </ul>
                 </li>
-                <li>@Html.ActionLink("Sản phẩm", "Index", "Product")</li>
-                <li>@Html.ActionLink("Phân công sản xuất", "Index", "Assignment")</li>
-                <li>
-                    <a class="dropdown-trigger" href="#!" data-target="dropdown3">
-                        Tỉ lệ đèn
-                        <i class="material-icons right">arrow_drop_down</i>
-                    </a>
-                    <ul id="dropdown3" class="dropdown-content">
-                        <li>@Html.ActionLink("Đèn cắt", "TiLeCat", "Light")</li>
-                    </ul>
-                </li>
+                 
             </ul>
         </div>
     </nav>

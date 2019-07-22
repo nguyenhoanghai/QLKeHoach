@@ -20,7 +20,7 @@ GPRO.namespace('Color');
 GPRO.Color = function () {
     var Global = {
         UrlAction: {
-            Gets: 'Color/Gets',
+            Gets: '/Color/Gets',
             Save: '/Color/Save',
             Delete: '/Color/Delete'
         },

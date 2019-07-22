@@ -20,7 +20,7 @@ GPRO.namespace('Product');
 GPRO.Product = function () {
     var Global = {
         UrlAction: {
-            Gets: 'Product/Gets',
+            Gets: '/Product/Gets',
             Save: '/Product/Save',
             Delete: '/Product/Delete'
         },

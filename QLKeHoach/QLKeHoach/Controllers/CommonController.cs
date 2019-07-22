@@ -18,5 +18,22 @@ namespace QLKeHoach.Controllers
                 return Json(lines.Select(x => new ModelSelectItem() { Id = x.MaChuyen, Name = x.TenChuyen }).ToList());
             return Json(new List<ModelSelectItem>());
         }
+
+        [HttpPost]
+        public JsonResult GetCommodities()
+        {
+            return Json(BLLCommodity.Gets(2,1) );
+        }
+
+        [HttpPost]
+        public JsonResult GetSizes()
+        {
+            return Json(BLLSize.Instance.GetSelects( ));
+        }
+        [HttpPost]
+        public JsonResult GetColors()
+        {
+            return Json(BLLColor.Instance.GetSelects());
+        }
     }
 }
