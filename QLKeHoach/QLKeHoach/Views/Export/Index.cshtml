@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
+}
+<br /> 
+
+<button id="btnSave" class=" waves-light btn ">Xuất kế hoạch sản xuất hiện tại các chuyền</button>
+<button id="btnNhap" class=" waves-light btn ">Nháp kế hoạch sản xuất </button>
+<br />
+<script>
+    $('#btnSave').click(() => {
+        window.location.href = '/export/Excel';
+    });
+</script>

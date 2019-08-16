@@ -69,6 +69,7 @@
           <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="ExchangeRate" Type="float" Nullable="false" />
           <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedUserId" Type="int" />
@@ -135,13 +136,47 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GproPlanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GproPlanEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="P_CurrencyUnit" EntityType="GproPlanModel.P_CurrencyUnit" />
+          <EntitySet Name="P_Customer" EntityType="GproPlanModel.P_Customer" />
+          <EntitySet Name="P_ReceptDetail" EntityType="GproPlanModel.P_ReceptDetail" />
+          <EntitySet Name="P_Reception" EntityType="GproPlanModel.P_Reception" />
+          <AssociationSet Name="FK_P_Reception_P_CurrencyUnit" Association="GproPlanModel.FK_P_Reception_P_CurrencyUnit">
+            <End Role="P_CurrencyUnit" EntitySet="P_CurrencyUnit" />
+            <End Role="P_Reception" EntitySet="P_Reception" />
+          </AssociationSet>
+          <AssociationSet Name="FK_P_Reception_P_Customer" Association="GproPlanModel.FK_P_Reception_P_Customer">
+            <End Role="P_Customer" EntitySet="P_Customer" />
+            <End Role="P_Reception" EntitySet="P_Reception" />
+          </AssociationSet>
+          <AssociationSet Name="FK_P_ReceptDetail_P_Reception" Association="GproPlanModel.FK_P_ReceptDetail_P_Reception">
+            <End Role="P_Reception" EntitySet="P_Reception" />
+            <End Role="P_ReceptDetail" EntitySet="P_ReceptDetail" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="P_CurrencyUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserId" Type="Int32" />
+          <Property Name="UpdatedUserId" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedUserId" Type="Int32" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="P_Reception" Relationship="GproPlanModel.FK_P_Reception_P_CurrencyUnit" FromRole="P_CurrencyUnit" ToRole="P_Reception" />
+        </EntityType>
         <EntityType Name="P_Customer">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -175,40 +210,6 @@
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="P_Reception" Relationship="GproPlanModel.FK_P_ReceptDetail_P_Reception" FromRole="P_ReceptDetail" ToRole="P_Reception" />
         </EntityType>
-        <EntityContainer Name="GproPlanEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="P_Customer" EntityType="Self.P_Customer" />
-          <EntitySet Name="P_ReceptDetail" EntityType="Self.P_ReceptDetail" />
-          <EntitySet Name="P_CurrencyUnit" EntityType="GproPlanModel.P_CurrencyUnit" />
-          <EntitySet Name="P_Reception" EntityType="GproPlanModel.P_Reception" />
-          <AssociationSet Name="FK_P_Reception_P_CurrencyUnit" Association="GproPlanModel.FK_P_Reception_P_CurrencyUnit">
-            <End Role="P_CurrencyUnit" EntitySet="P_CurrencyUnit" />
-            <End Role="P_Reception" EntitySet="P_Reception" />
-          </AssociationSet>
-          <AssociationSet Name="FK_P_Reception_P_Customer" Association="GproPlanModel.FK_P_Reception_P_Customer">
-            <End Role="P_Customer" EntitySet="P_Customer" />
-            <End Role="P_Reception" EntitySet="P_Reception" />
-          </AssociationSet>
-          <AssociationSet Name="FK_P_ReceptDetail_P_Reception" Association="GproPlanModel.FK_P_ReceptDetail_P_Reception">
-            <End Role="P_Reception" EntitySet="P_Reception" />
-            <End Role="P_ReceptDetail" EntitySet="P_ReceptDetail" />
-          </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="P_CurrencyUnit">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedUserId" Type="Int32" />
-          <Property Name="UpdatedUserId" Type="Int32" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeletedUserId" Type="Int32" />
-          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="P_Reception" Relationship="GproPlanModel.FK_P_Reception_P_CurrencyUnit" FromRole="P_CurrencyUnit" ToRole="P_Reception" />
-        </EntityType>
         <EntityType Name="P_Reception">
           <Key>
             <PropertyRef Name="Id" />
@@ -220,6 +221,7 @@
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="ExchangeRate" Type="Double" Nullable="false" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedUserId" Type="Int32" />
@@ -273,46 +275,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GproPlanModelStoreContainer" CdmEntityContainer="GproPlanEntities">
-          <EntitySetMapping Name="P_Customer">
-            <EntityTypeMapping TypeName="GproPlanModel.P_Customer">
-              <MappingFragment StoreEntitySet="P_Customer">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
-                <ScalarProperty Name="UpdatedUserId" ColumnName="UpdatedUserId" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="DeletedUserId" ColumnName="DeletedUserId" />
-                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="P_ReceptDetail">
-            <EntityTypeMapping TypeName="GproPlanModel.P_ReceptDetail">
-              <MappingFragment StoreEntitySet="P_ReceptDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
-                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
-                <ScalarProperty Name="UpdatedUserId" ColumnName="UpdatedUserId" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="DeletedUserId" ColumnName="DeletedUserId" />
-                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="P_CurrencyUnit">
             <EntityTypeMapping TypeName="GproPlanModel.P_CurrencyUnit">
               <MappingFragment StoreEntitySet="P_CurrencyUnit">
@@ -329,6 +291,46 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="P_Customer">
+            <EntityTypeMapping TypeName="GproPlanModel.P_Customer">
+              <MappingFragment StoreEntitySet="P_Customer">
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedUserId" ColumnName="DeletedUserId" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedUserId" ColumnName="UpdatedUserId" />
+                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="P_ReceptDetail">
+            <EntityTypeMapping TypeName="GproPlanModel.P_ReceptDetail">
+              <MappingFragment StoreEntitySet="P_ReceptDetail">
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedUserId" ColumnName="DeletedUserId" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedUserId" ColumnName="UpdatedUserId" />
+                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="P_Reception">
             <EntityTypeMapping TypeName="GproPlanModel.P_Reception">
               <MappingFragment StoreEntitySet="P_Reception">
@@ -339,6 +341,7 @@
                 <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />

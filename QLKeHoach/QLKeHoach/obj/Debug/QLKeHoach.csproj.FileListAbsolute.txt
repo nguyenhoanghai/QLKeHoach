@@ -64,3 +64,5 @@ E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach\bin\EntityFramework.dll
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach\bin\QLKeHoach.Data.dll.config
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach\bin\EntityFramework.xml
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach\bin\GPRO.Core.dll
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach\bin\EPPlus.dll
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach\bin\OpenXmlPackaging.dll

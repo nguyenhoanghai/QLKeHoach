@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus">
+      <HintPath>..\Libraries\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="GPRO.Core">
       <HintPath>..\Libraries\GPRO.Core.dll</HintPath>
     </Reference>
@@ -50,6 +53,9 @@
       <HintPath>..\Libraries\GPRO.Ultilities.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="OpenXmlPackaging">
+      <HintPath>..\Libraries\OpenXmlPackaging.dll</HintPath>
+    </Reference>
     <Reference Include="PMS.Business">
       <HintPath>..\Libraries\PMS.Business.dll</HintPath>
     </Reference>
@@ -158,6 +164,7 @@
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\CurrencyUnitController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ReceiptController.cs" />
@@ -171,6 +178,7 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="Areas\Api\Views\web.config" />
+    <Content Include="Files\excel-templates\plan-template.xlsx" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_MaterializeLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -181,6 +189,8 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Receipt\Index.cshtml" />
     <Content Include="Views\CurrencyUnit\Index.cshtml" />
+    <Content Include="Views\Export\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -193,6 +203,7 @@
     <Folder Include="Areas\Api\Controllers\" />
     <Folder Include="Areas\Api\Models\" />
     <Folder Include="Areas\Api\Views\Shared\" />
+    <Folder Include="bin\" />
     <Folder Include="Models\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\Base\" />

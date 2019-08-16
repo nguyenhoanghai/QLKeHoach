@@ -1,0 +1,13 @@
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Release\QLKeHoach.Data.dll.config
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Release\QLKeHoach.Data.dll
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Release\QLKeHoach.Data.pdb
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Release\EntityFramework.dll
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Release\GPRO.Ultilities.dll
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Release\PMS.Business.dll
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Release\PMS.Data.dll
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Release\EntityFramework.xml
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\obj\Release\QLKeHoach.Data.csprojAssemblyReference.cache
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\obj\Release\QLKeHoach.Data.csproj.CoreCompileInputs.cache
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\obj\Release\QLKeHoach.Data.csproj.CopyComplete
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\obj\Release\QLKeHoach.Data.dll
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\obj\Release\QLKeHoach.Data.pdb

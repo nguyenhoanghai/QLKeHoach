@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
+}
+
+<h4>Phân hàng sản xuất </h4>
+<hr />
+<div class="row">
+    <div class="input-field col s4  ">
+        <select id="line-select" class=""></select>
+        <label>Chuyền / Tổ</label>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table id="tbAssignments" width="100%" class="table striped highlight "></table>
+</div>
+<script src="~/Scripts/App/Assignment/Assignment.js"></script>
+<script>
+
+    var ass = new GPRO.Assignment();
+    ass.Init();
+    //function Edit(Id) {
+    //    ass.Edit(Id);
+    //}
+
+    //function Delete(Id) {
+    //    ass.Delete(Id);
+    //}
+</script>

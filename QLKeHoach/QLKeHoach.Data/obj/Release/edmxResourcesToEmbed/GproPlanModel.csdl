@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GproPlanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="P_Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedUserId" Type="Int32" />
+    <Property Name="UpdatedUserId" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedUserId" Type="Int32" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="P_Reception" Relationship="GproPlanModel.FK_P_Reception_P_Customer" FromRole="P_Customer" ToRole="P_Reception" />
+  </EntityType>
+  <EntityType Name="P_ReceptDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="ColorId" Type="Int32" Nullable="false" />
+    <Property Name="SizeId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedUserId" Type="Int32" />
+    <Property Name="UpdatedUserId" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedUserId" Type="Int32" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="P_Reception" Relationship="GproPlanModel.FK_P_ReceptDetail_P_Reception" FromRole="P_ReceptDetail" ToRole="P_Reception" />
+  </EntityType>
+  <EntityContainer Name="GproPlanEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="P_Customer" EntityType="Self.P_Customer" />
+    <EntitySet Name="P_ReceptDetail" EntityType="Self.P_ReceptDetail" />
+    <EntitySet Name="P_CurrencyUnit" EntityType="GproPlanModel.P_CurrencyUnit" />
+    <EntitySet Name="P_Reception" EntityType="GproPlanModel.P_Reception" />
+    <AssociationSet Name="FK_P_Reception_P_CurrencyUnit" Association="GproPlanModel.FK_P_Reception_P_CurrencyUnit">
+      <End Role="P_CurrencyUnit" EntitySet="P_CurrencyUnit" />
+      <End Role="P_Reception" EntitySet="P_Reception" />
+    </AssociationSet>
+    <AssociationSet Name="FK_P_Reception_P_Customer" Association="GproPlanModel.FK_P_Reception_P_Customer">
+      <End Role="P_Customer" EntitySet="P_Customer" />
+      <End Role="P_Reception" EntitySet="P_Reception" />
+    </AssociationSet>
+    <AssociationSet Name="FK_P_ReceptDetail_P_Reception" Association="GproPlanModel.FK_P_ReceptDetail_P_Reception">
+      <End Role="P_Reception" EntitySet="P_Reception" />
+      <End Role="P_ReceptDetail" EntitySet="P_ReceptDetail" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="P_CurrencyUnit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedUserId" Type="Int32" />
+    <Property Name="UpdatedUserId" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedUserId" Type="Int32" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="P_Reception" Relationship="GproPlanModel.FK_P_Reception_P_CurrencyUnit" FromRole="P_CurrencyUnit" ToRole="P_Reception" />
+  </EntityType>
+  <EntityType Name="P_Reception">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CurrencyUnitId" Type="Int32" Nullable="false" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="ExchangeRate" Type="Double" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedUserId" Type="Int32" />
+    <Property Name="UpdatedUserId" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletedUserId" Type="Int32" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="P_CurrencyUnit" Relationship="GproPlanModel.FK_P_Reception_P_CurrencyUnit" FromRole="P_Reception" ToRole="P_CurrencyUnit" />
+    <NavigationProperty Name="P_Customer" Relationship="GproPlanModel.FK_P_Reception_P_Customer" FromRole="P_Reception" ToRole="P_Customer" />
+    <NavigationProperty Name="P_ReceptDetail" Relationship="GproPlanModel.FK_P_ReceptDetail_P_Reception" FromRole="P_Reception" ToRole="P_ReceptDetail" />
+  </EntityType>
+  <Association Name="FK_P_Reception_P_CurrencyUnit">
+    <End Type="GproPlanModel.P_CurrencyUnit" Role="P_CurrencyUnit" Multiplicity="1" />
+    <End Type="GproPlanModel.P_Reception" Role="P_Reception" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="P_CurrencyUnit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="P_Reception">
+        <PropertyRef Name="CurrencyUnitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_P_Reception_P_Customer">
+    <End Type="GproPlanModel.P_Customer" Role="P_Customer" Multiplicity="1" />
+    <End Type="GproPlanModel.P_Reception" Role="P_Reception" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="P_Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="P_Reception">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_P_ReceptDetail_P_Reception">
+    <End Type="GproPlanModel.P_Reception" Role="P_Reception" Multiplicity="1" />
+    <End Type="GproPlanModel.P_ReceptDetail" Role="P_ReceptDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="P_Reception">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="P_ReceptDetail">
+        <PropertyRef Name="ReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

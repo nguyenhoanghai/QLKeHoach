@@ -26,6 +26,7 @@ namespace QLKeHoach.Data
         public int CustomerId { get; set; }
         public double ExchangeRate { get; set; }
         public string Note { get; set; }
+        public bool Status { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<int> CreatedUserId { get; set; }

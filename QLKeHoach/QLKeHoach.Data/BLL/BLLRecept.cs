@@ -46,7 +46,8 @@ namespace QLKeHoach.Data.BLL
                                 CustomerId= x.CustomerId,
                                 CurrencyUnitId = x.CurrencyUnitId,
                                 CuUnitName = x.P_CurrencyUnit.Code ,
-                                ExchangeRate = x.ExchangeRate
+                                ExchangeRate = x.ExchangeRate,
+                                Status = x.Status
                             }).ToList();
                 }
                 catch (Exception ex)
@@ -84,14 +85,22 @@ namespace QLKeHoach.Data.BLL
             {
                 using (var db = new GproPlanEntities())
                 {
-                    var obj = db.P_Reception.FirstOrDefault(x => x.Id == Id);
+                    var obj = db.P_Reception.FirstOrDefault(x => x.Id == Id  );
                     if (obj != null)
                     {
-                        obj.IsDeleted = true;
-                        obj.DeletedDate = DateTime.Now;
-                        db.SaveChanges();
-                        result.IsSuccess = true;
-                        result.Messages.Add(new Message() { msg = "Xóa đơn hàng thành công.", Title = "Thông Báo" });
+                        if (obj.Status)
+                        {
+                            result.IsSuccess = false;
+                            result.Messages.Add(new Message() { msg = "Đơn hàng " + obj.Code + " đã được duyệt không thể xóa. Xóa đơn hàng thất bại.", Title = "Lỗi hành động" });
+                        }
+                        else
+                        {
+                            obj.IsDeleted = true;
+                            obj.DeletedDate = DateTime.Now;
+                            db.SaveChanges();
+                            result.IsSuccess = true;
+                            result.Messages.Add(new Message() { msg = "Xóa đơn hàng thành công.", Title = "Thông Báo" });
+                        }
                     }
                     else
                     {
@@ -151,7 +160,7 @@ namespace QLKeHoach.Data.BLL
                         else
                         {
                             reception = db.P_Reception.FirstOrDefault(x => !x.IsDeleted && x.Id == objModel.Id);
-                            if (reception != null)
+                            if (reception != null && !reception.Status)
                             {
                                 reception.Code = objModel.Code;
                                 reception.Name = objModel.Name; 
@@ -160,6 +169,7 @@ namespace QLKeHoach.Data.BLL
                                 reception.CustomerId = objModel.CustomerId;
                                 reception.Note = objModel.Note;
                                 reception.UpdatedDate = DateTime.Now;
+                                reception.Status = objModel.Status;
                                 db.Database.ExecuteSqlCommand("update P_ReceptDetail set IsDeleted=1 where ReceiptId="+reception.Id);
                                 var detailObjs = objModel.Details.ToList();
                                 for (int i = 0; i < detailObjs.Count - 1; i++)
@@ -175,7 +185,7 @@ namespace QLKeHoach.Data.BLL
                             else
                             {
                                 rs.IsSuccess = false;
-                                rs.Messages.Add(new Message() { msg = "đơn hàng đang thao tác không tồn tại hoặc đã bị xóa. Vui lòng chọn lại tên khác", Title = "Lỗi trùng tên" });
+                                rs.Messages.Add(new Message() { msg = "Đơn hàng đang thao tác đã được duyệt hoặc đã bị xóa. Vui lòng kiểm tra lại", Title = "Lỗi " });
                             }
                         }
                         if (rs.IsSuccess)
