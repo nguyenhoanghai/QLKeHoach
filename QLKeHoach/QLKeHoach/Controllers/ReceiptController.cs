@@ -1,11 +1,9 @@
 ﻿using PMS.Business;
-using QLKeHoach.Data;
+using PMS.Business.Plan;  
 using QLKeHoach.Data.BLL;
-using QLKeHoach.Data.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using QLKeHoach.Data.ENums;
+using QLKeHoach.Data.Model; 
+using System.Linq; 
 using System.Web.Mvc;
 
 namespace QLKeHoach.Controllers
@@ -23,8 +21,28 @@ namespace QLKeHoach.Controllers
 
         [HttpPost]
         public JsonResult Gets()
-        {
+        { 
             return Json(BLLRecept.Instance.Gets());
+        }
+
+        [HttpPost]
+        public JsonResult GetById(int Id)
+        {
+            var receipt = BLLRecept.Instance.GetById(Id);
+            if(receipt!= null && receipt.Status == eStatusName.Approved && receipt.Details.Count()>0)
+            {
+                foreach (var item in receipt.Details)
+                {
+                    item.TotalAssign = BLLAssgin.Instance.CountQuantytiesHasAssign(item.Id);
+                }
+            }
+            return Json(receipt);
+        }
+
+        [HttpPost]
+        public JsonResult GetAssignByOrderDetailId(int orderDetailId)
+        { 
+            return Json( BLLAssgin.Instance.LayPhanCong(orderDetailId));
         }
 
         [HttpPost]

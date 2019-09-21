@@ -23,12 +23,12 @@ namespace QLKeHoach.Data
         public double Price { get; set; }
         public string Note { get; set; }
         public bool IsDeleted { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<int> CreatedUserId { get; set; }
-        public Nullable<int> UpdatedUserId { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public Nullable<int> DeletedUserId { get; set; }
-        public Nullable<System.DateTime> DeletedDate { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<int> DeletedBy { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual P_Reception P_Reception { get; set; }
     }

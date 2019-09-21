@@ -26,14 +26,18 @@ namespace QLKeHoach.Data
         public int CustomerId { get; set; }
         public double ExchangeRate { get; set; }
         public string Note { get; set; }
-        public bool Status { get; set; }
+        public string Status { get; set; }
         public bool IsDeleted { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<int> CreatedUserId { get; set; }
-        public Nullable<int> UpdatedUserId { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public Nullable<int> DeletedUserId { get; set; }
-        public Nullable<System.DateTime> DeletedDate { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<int> DeletedBy { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
+        public Nullable<int> ApprovedBy { get; set; }
+        public Nullable<System.DateTime> ApprovedAt { get; set; }
+        public Nullable<System.DateTime> DoneAt { get; set; }
+        public Nullable<int> DoneBy { get; set; }
     
         public virtual P_CurrencyUnit P_CurrencyUnit { get; set; }
         public virtual P_Customer P_Customer { get; set; }

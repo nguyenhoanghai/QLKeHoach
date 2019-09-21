@@ -11,5 +11,6 @@ namespace QLKeHoach.Data.Model
         public string CommoName { get; set; }
         public string SizeName { get; set; }
         public string ColorName { get; set; }
+        public int TotalAssign { get; set; }
     }
 }

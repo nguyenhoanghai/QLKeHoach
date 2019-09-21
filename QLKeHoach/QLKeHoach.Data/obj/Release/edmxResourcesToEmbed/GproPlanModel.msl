@@ -1,46 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="GproPlanModelStoreContainer" CdmEntityContainer="GproPlanEntities">
-    <EntitySetMapping Name="P_Customer">
-      <EntityTypeMapping TypeName="GproPlanModel.P_Customer">
-        <MappingFragment StoreEntitySet="P_Customer">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
-          <ScalarProperty Name="UpdatedUserId" ColumnName="UpdatedUserId" />
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="DeletedUserId" ColumnName="DeletedUserId" />
-          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="P_ReceptDetail">
-      <EntityTypeMapping TypeName="GproPlanModel.P_ReceptDetail">
-        <MappingFragment StoreEntitySet="P_ReceptDetail">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="ColorId" ColumnName="ColorId" />
-          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
-          <ScalarProperty Name="UpdatedUserId" ColumnName="UpdatedUserId" />
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="DeletedUserId" ColumnName="DeletedUserId" />
-          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="P_CurrencyUnit">
       <EntityTypeMapping TypeName="GproPlanModel.P_CurrencyUnit">
         <MappingFragment StoreEntitySet="P_CurrencyUnit">
@@ -57,15 +17,59 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="P_Reception">
-      <EntityTypeMapping TypeName="GproPlanModel.P_Reception">
-        <MappingFragment StoreEntitySet="P_Reception">
+    <EntitySetMapping Name="P_Customer">
+      <EntityTypeMapping TypeName="GproPlanModel.P_Customer">
+        <MappingFragment StoreEntitySet="P_Customer">
           <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
           <ScalarProperty Name="DeletedUserId" ColumnName="DeletedUserId" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
           <ScalarProperty Name="UpdatedUserId" ColumnName="UpdatedUserId" />
           <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="P_ReceptDetail">
+      <EntityTypeMapping TypeName="GproPlanModel.P_ReceptDetail">
+        <MappingFragment StoreEntitySet="P_ReceptDetail">
+          <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+          <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="P_Reception">
+      <EntityTypeMapping TypeName="GproPlanModel.P_Reception">
+        <MappingFragment StoreEntitySet="P_Reception">
+          <ScalarProperty Name="DoneBy" ColumnName="DoneBy" />
+          <ScalarProperty Name="DoneAt" ColumnName="DoneAt" />
+          <ScalarProperty Name="ApprovedAt" ColumnName="ApprovedAt" />
+          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+          <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Note" ColumnName="Note" />

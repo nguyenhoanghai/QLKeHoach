@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0e8cc28eae2e420aa4a7c39f6e07a76e" Name="Diagram1">
-        <EntityTypeShape EntityType="GproPlanModel.P_CurrencyUnit" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="GproPlanModel.P_Customer" Width="1.5" PointX="0.75" PointY="1.375" />
-        <EntityTypeShape EntityType="GproPlanModel.P_ReceptDetail" Width="1.5" PointX="5.25" PointY="1.25" />
-        <EntityTypeShape EntityType="GproPlanModel.P_Reception" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="GproPlanModel.P_CurrencyUnit" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="GproPlanModel.P_Customer" Width="1.5" PointX="0.75" PointY="1.875" />
+        <EntityTypeShape EntityType="GproPlanModel.P_ReceptDetail" Width="1.5" PointX="5.25" PointY="1.625" />
+        <EntityTypeShape EntityType="GproPlanModel.P_Reception" Width="1.5" PointX="3" PointY="1.125" />
         <AssociationConnector Association="GproPlanModel.FK_P_Reception_P_CurrencyUnit" />
         <AssociationConnector Association="GproPlanModel.FK_P_Reception_P_Customer" />
         <AssociationConnector Association="GproPlanModel.FK_P_ReceptDetail_P_Reception" />

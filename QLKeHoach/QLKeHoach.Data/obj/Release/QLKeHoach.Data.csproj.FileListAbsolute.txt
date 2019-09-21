@@ -11,3 +11,4 @@ E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\obj\Release\QLKeHoach.Data.cs
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\obj\Release\QLKeHoach.Data.csproj.CopyComplete
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\obj\Release\QLKeHoach.Data.dll
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\obj\Release\QLKeHoach.Data.pdb
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Release\PMS.Business.Plan.dll

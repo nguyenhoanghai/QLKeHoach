@@ -35,5 +35,6 @@ namespace QLKeHoach.Controllers
         {
             return Json(BLLColor.Instance.GetSelects());
         }
+         
     }
 }

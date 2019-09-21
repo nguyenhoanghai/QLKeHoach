@@ -66,12 +66,12 @@
     <Property Name="Price" Type="Double" Nullable="false" />
     <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatedUserId" Type="Int32" />
-    <Property Name="UpdatedUserId" Type="Int32" />
-    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-    <Property Name="DeletedUserId" Type="Int32" />
-    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="DeletedBy" Type="Int32" />
+    <Property Name="DeletedAt" Type="DateTime" Precision="3" />
     <NavigationProperty Name="P_Reception" Relationship="GproPlanModel.FK_P_ReceptDetail_P_Reception" FromRole="P_ReceptDetail" ToRole="P_Reception" />
   </EntityType>
   <EntityType Name="P_Reception">
@@ -85,14 +85,18 @@
     <Property Name="CustomerId" Type="Int32" Nullable="false" />
     <Property Name="ExchangeRate" Type="Double" Nullable="false" />
     <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatedUserId" Type="Int32" />
-    <Property Name="UpdatedUserId" Type="Int32" />
-    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-    <Property Name="DeletedUserId" Type="Int32" />
-    <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="DeletedBy" Type="Int32" />
+    <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+    <Property Name="ApprovedBy" Type="Int32" />
+    <Property Name="ApprovedAt" Type="DateTime" Precision="3" />
+    <Property Name="DoneAt" Type="DateTime" Precision="3" />
+    <Property Name="DoneBy" Type="Int32" />
     <NavigationProperty Name="P_CurrencyUnit" Relationship="GproPlanModel.FK_P_Reception_P_CurrencyUnit" FromRole="P_Reception" ToRole="P_CurrencyUnit" />
     <NavigationProperty Name="P_Customer" Relationship="GproPlanModel.FK_P_Reception_P_Customer" FromRole="P_Reception" ToRole="P_Customer" />
     <NavigationProperty Name="P_ReceptDetail" Relationship="GproPlanModel.FK_P_ReceptDetail_P_Reception" FromRole="P_Reception" ToRole="P_ReceptDetail" />

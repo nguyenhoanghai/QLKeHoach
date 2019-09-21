@@ -129,3 +129,37 @@ input.number,
 #detail-table tbody td{
     padding: 0 5px !important
 }
+
+.Approved { color:red ; font-weight:400}
+
+td.details-control {
+    background: url('../images/a-up-20.png') no-repeat center center; 
+    cursor: pointer;
+}
+
+tr.shown td.details-control {
+    background: url('../images/a-down-20.png') no-repeat center center;
+}
+
+table.dataTable thead .sorting_desc {
+    background-image: url('../images/sort_desc.png');
+}
+
+table.dataTable thead .sorting_asc {
+    background-image: url('../images/sort_asc.png');
+}
+
+table.dataTable thead .sorting {
+    background-image: url('../images/sort_both.png');
+}
+.bold{ font-weight:bold}
+
+.nhap-title {
+    font-weight: bold;
+    color: blue;
+    text-decoration: underline;
+    font-size: 16px;
+}
+.nhap-content{
+    font-size:13px
+}

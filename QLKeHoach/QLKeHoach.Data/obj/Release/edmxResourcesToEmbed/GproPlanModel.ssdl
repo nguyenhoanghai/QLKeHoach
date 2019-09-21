@@ -46,12 +46,12 @@
     <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="Note" Type="nvarchar(max)" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="CreatedUserId" Type="int" />
-    <Property Name="UpdatedUserId" Type="int" />
-    <Property Name="UpdatedDate" Type="datetime" />
-    <Property Name="DeletedUserId" Type="int" />
-    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedBy" Type="int" />
+    <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="P_Reception">
     <Key>
@@ -64,14 +64,18 @@
     <Property Name="CustomerId" Type="int" Nullable="false" />
     <Property Name="ExchangeRate" Type="float" Nullable="false" />
     <Property Name="Note" Type="nvarchar(max)" />
-    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="CreatedUserId" Type="int" />
-    <Property Name="UpdatedUserId" Type="int" />
-    <Property Name="UpdatedDate" Type="datetime" />
-    <Property Name="DeletedUserId" Type="int" />
-    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedBy" Type="int" />
+    <Property Name="DeletedAt" Type="datetime" />
+    <Property Name="ApprovedBy" Type="int" />
+    <Property Name="ApprovedAt" Type="datetime" />
+    <Property Name="DoneAt" Type="datetime" />
+    <Property Name="DoneBy" Type="int" />
   </EntityType>
   <Association Name="FK_P_ReceptDetail_P_Reception">
     <End Role="P_Reception" Type="Self.P_Reception" Multiplicity="1" />

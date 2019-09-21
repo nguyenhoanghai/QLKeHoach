@@ -11,3 +11,4 @@ E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\obj\Debug\QLKeHoach.Data.cspr
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Debug\PMS.Business.dll
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Debug\PMS.Data.dll
 E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Debug\GPRO.Ultilities.dll
+E:\Hai_GPRO\Git_QLKeHoach\QLKeHoach\QLKeHoach.Data\bin\Debug\PMS.Business.Plan.dll

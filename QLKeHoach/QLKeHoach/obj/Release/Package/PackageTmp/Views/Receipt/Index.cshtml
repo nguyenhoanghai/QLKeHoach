@@ -1,7 +1,7 @@
-﻿@using  Newtonsoft.Json
+﻿@using Newtonsoft.Json
 @{
     ViewBag.Title = "Index";
-Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
+    Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
 }
 
 <h4>Quản lý đơn hàng</h4>
@@ -11,6 +11,16 @@ Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
     <table id="tbReceipts" width="100%" class=" table striped highlight "></table>
 </div>
 
+<style>
+    #sampleTable {
+        width: 100% !important
+    }
+
+    .date .datepicker-modal {
+        width:100%
+    }
+</style>
+
 <!-- Modal Structure -->
 <div id="modal1" class="modal modal-full">
     <div class="modal-content" style=" padding-bottom:0">
@@ -19,24 +29,24 @@ Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
         <div class="row" style=" margin-bottom:0">
             <div class="col s4">
                 <div class="col input-field m12">
-                    <input class="" type="text" id='txtcode' />
-                    <label for="txtcode">Mã đơn hàng</label>
+                    <input class="" type="text" id='txtcode' required/> 
+                    <label for="txtcode">Mã đơn hàng <span class="red-text bold">*</span></label>
                 </div>
                 <div class="col input-field m12">
                     <input class="" type="text" id='txtname' />
-                    <label for="txtname">Tên đơn hàng</label>
+                    <label for="txtname">Tên đơn hàng <span class="red-text bold">*</span></label>
                 </div>
                 <div class="col input-field m12">
                     <select id='cus-id'></select>
-                    <label for="cus-id">Khách hàng</label>
+                    <label for="cus-id">Khách hàng <span class="red-text bold">*</span></label>
                 </div>
                 <div class="col input-field m6">
                     <select id='unit-id'></select>
-                    <label for="unit-id">Đơn vị tiền tệ</label>
+                    <label for="unit-id">Đơn vị tiền tệ <span class="red-text bold">*</span></label>
                 </div>
                 <div class="col input-field m6">
                     <input id='rate' value="1" type="number" />
-                    <label for="rate">Tỉ giá</label>
+                    <label for="rate">Tỉ giá <span class="red-text bold">*</span></label>
                 </div>
                 <div class="col input-field m12">
                     <textarea class="materialize-textarea" id='txtNote'></textarea>
@@ -56,7 +66,7 @@ Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
                         </tr>
                     </thead>
                     <tbody></tbody>
-                </table>
+                </table> 
             </div>
         </div>
     </div>
@@ -72,7 +82,87 @@ Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
 <datalist id="size"></datalist>
 
 
+<div id="modal-list-detail" class="modal modal-full">
+    <div class="modal-content" style=" padding-bottom:0">
+        <h4>Thông tin chi tiết phân công đơn hàng</h4>
+        <hr />
+        <div class="row" style=" margin-bottom:0">
+            <div class="col s12">
+                <ul>
+                    <li>Đơn hàng : <span id="lb-ma-dh" class="blue-text"></span></li>
+                    <li>Khách hàng : <span id="lb-ten-kh" class="blue-text"></span></li>
+                </ul>
+            </div>             
+            <div class="col s12"> 
+                <table class="striped highlight table table-bordered" id="sampleTable"></table>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="modal-footer"> 
+        <button id="btnCancel" class="modal-close  grey btn ">Hủy bỏ</button>
+    </div>
+</div>
+
+<div id="modal-assign" class="modal modal-small">
+    <div class="modal-content" style=" padding-bottom:0">
+        <h4>Thông tin phân công sản xuất</h4>
+        <hr />
+        <div class="row" style=" margin-bottom:0">
+            <div class="col m6 nhap-box hide">
+                <div class="nhap-title">Thông tin nháp kế hoạch sản xuất dự kiến</div>
+                <div class="nhap-content">
+
+                </div>
+            </div>
+            <div class="col m12 add-box">
+                <input class="" type="hidden" id='stt' />
+                <div class="col input-field m6">
+                    <select id='line-id'></select>
+                    <label for="line-id">Chuyền <span class="red-text bold">*</span></label>
+                </div>
+                <div class="col input-field m6">
+                    <input id='stttt' value="1" type="number" />
+                    <label for="stttt">TT sản xuất <span class="red-text bold">*</span></label>
+                </div> 
+                <div class="col input-field m6">
+                    <input class="" type="number" id='slkh' />
+                    <label for="slkh">Sản lượng PC <span class="red-text bold">*</span></label>
+                </div>                
+                <div class="col input-field m6">
+                    <input id='price' value="1" type="number" />
+                    <label for="price">Đơn giá <span class="red-text bold">*</span></label>
+                </div>
+
+                <div class="col input-field m6">
+                    <input id='pricecm' value="1" type="number" />
+                    <label for="pricecm">Đơn giá CM <span class="red-text bold">*</span></label>
+                </div>
+                <div class="col input-field m6">
+                    <input id='pricecat' value="1" type="number" />
+                    <label for="pricecat">Đơn giá cắt <span class="red-text bold">*</span></label>
+                </div>
+                <div class="col input-field m6 date">
+                    <input id='date-in' type="text" class="datepicker" />
+                    <label for="date-in">Ngày vào chuyền <span class="red-text bold">*</span></label>
+                </div>
+                <div class="col input-field m6 date">
+                    <input id='date-out' type="text" class="datepicker" />
+                    <label for="date-out">Ngày nhập kho</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="modal-footer">
+        <button id="btnNhap" class=" waves-light btn ">Nháp phân công</button>
+        <button id="btnSave" class=" waves-light btn ">Lưu phân công</button>
+        <button id="btnCancel" class="modal-close  grey btn ">Hủy bỏ</button>
+    </div>
+</div>
+
 <script src="~/Scripts/App/Receipt/Receipt.js"></script>
+
 <script>
 
     var Receipt = new GPRO.Receipt();
@@ -84,6 +174,25 @@ Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
     function Edit(Id) {
         Receipt.Edit(Id);
     }
+
+    function Assign(Id) {
+        Receipt.Assign(Id);
+    }
+
+    function AddAssign(Id) {
+        Receipt.AddAssign(Id);
+    }
+    function EditAssign(Id) {
+        Receipt.EditAssign(Id);
+    }
+    function DeleteAssign(Id) {
+        Receipt.DeleteAssign(Id);
+    }
+
+    function Assign(Id) {
+        Receipt.Assign(Id);
+    }
+
 
     function Delete(Id) {
         Receipt.Delete(Id);

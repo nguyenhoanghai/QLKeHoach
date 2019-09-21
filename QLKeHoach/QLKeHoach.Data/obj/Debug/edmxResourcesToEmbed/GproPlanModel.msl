@@ -39,12 +39,12 @@
     <EntitySetMapping Name="P_ReceptDetail">
       <EntityTypeMapping TypeName="GproPlanModel.P_ReceptDetail">
         <MappingFragment StoreEntitySet="P_ReceptDetail">
-          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-          <ScalarProperty Name="DeletedUserId" ColumnName="DeletedUserId" />
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="UpdatedUserId" ColumnName="UpdatedUserId" />
-          <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="Note" ColumnName="Note" />
           <ScalarProperty Name="Price" ColumnName="Price" />
@@ -60,12 +60,16 @@
     <EntitySetMapping Name="P_Reception">
       <EntityTypeMapping TypeName="GproPlanModel.P_Reception">
         <MappingFragment StoreEntitySet="P_Reception">
-          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-          <ScalarProperty Name="DeletedUserId" ColumnName="DeletedUserId" />
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="UpdatedUserId" ColumnName="UpdatedUserId" />
-          <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="DoneBy" ColumnName="DoneBy" />
+          <ScalarProperty Name="DoneAt" ColumnName="DoneAt" />
+          <ScalarProperty Name="ApprovedAt" ColumnName="ApprovedAt" />
+          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+          <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Note" ColumnName="Note" />

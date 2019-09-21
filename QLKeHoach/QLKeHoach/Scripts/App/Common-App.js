@@ -179,3 +179,11 @@ function GetCurrencyUnits(controlId) {
         }
     });
 }
+function GetStatus(status) {
+    var vnStatus = '';
+    switch (status) {
+        case 'Draft': vnStatus =  'lưu nháp'; break;
+        case 'Approved': vnStatus =  'đã duyệt'; break; 
+    }
+    return vnStatus;
+}
