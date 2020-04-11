@@ -163,3 +163,10 @@ table.dataTable thead .sorting {
 .nhap-content{
     font-size:13px
 }
+
+table caption {
+    font-weight: bold;
+    text-align: left;
+    color: blue;
+    text-decoration: underline;
+}

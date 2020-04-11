@@ -1,6 +1,7 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using PMS.Business.Plan;
+using PMS.Business.Plan.Models;
 using QLKeHoach.Data.BLL;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,6 @@ namespace QLKeHoach.Controllers
         public ActionResult Index()
         {
             return View();
-
         }
 
         public JsonResult Nhap()
@@ -25,14 +25,18 @@ namespace QLKeHoach.Controllers
             throw new Exception("Datetime format is not valid or same format");
         }
 
-        public JsonResult NhapKH(int machuyen, int sanluong, int masp)
+        public JsonResult NhapKH(int machuyen, int sanluong, int masp, float hieuxuat ,  int sizeId, int colorId)
         {
-            return Json(BLLAssgin.Instance.NhapKH(machuyen, sanluong, masp));
+            return Json(BLLAssgin.Instance.NhapKH(machuyen, sanluong, masp, hieuxuat, sizeId,colorId));
         }
 
-        public void Excel()
+        public void Excel(int type)
         {
-            var data = BLLRecept.Instance.MapPOInfo(BLLAssgin.Instance.GetExcelInfo_2(0));
+            List<ChuyenPC> data;
+            if (type == 1)
+                data = BLLRecept.Instance.MapPOInfo(BLLAssgin.Instance.GetExcelInfo_2(0));
+            else
+                data = BLLRecept.Instance.MapPOInfo(BLLAssgin.Instance.GetExcelInfo_3(0));
             var filePath = new FileInfo(Server.MapPath(@"~\files\excel-templates\plan-template.xlsx"));
             using (var package = new ExcelPackage(filePath))
             {
@@ -238,7 +242,7 @@ namespace QLKeHoach.Controllers
 
                         //thuc hien ngay
                         start2++;
-                        foreach (var day in item.ThisMonth[i].ThucHien.Where(x=>x.date.Month == thismonth).OrderBy(x => x.date).ToList())
+                        foreach (var day in item.ThisMonth[i].ThucHien.Where(x => x.date.Month == thismonth).OrderBy(x => x.date).ToList())
                         {
                             worksheet1.Cells[start2 + i, (18 + day.date.Day)].Value = day.TH;
                         }

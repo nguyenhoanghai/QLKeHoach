@@ -793,6 +793,7 @@ GPRO.Receipt = function () {
             $('#date-in').val((assign.DateInput != null ? moment(assign.DateInput).format('DD/MM/YYYY') : ''));
             $('#date-out').val((assign.DateOutput != null ? moment(assign.DateOutput).format('DD/MM/YYYY') : ''));
             $('#line-id').val(assign.MaChuyen);
+            $('#hieuxuat').val(assign.HieuXuatKH);
             $('#' + Global.Element.popupAssignId).modal()[0].M_Modal.options.dismissible = false;
             $('#' + Global.Element.popupAssignId).modal('open');
             M.updateTextFields();
@@ -849,6 +850,7 @@ GPRO.Receipt = function () {
                     PriceCut: $('#pricecat').val(),
                     DateInput: $('#date-in').val(),
                     DateOutput: $('#date-out').val(),
+                    HieuXuatKH: parseFloat( $('#hieuxuat').val()),
                     OrderDetailId: Global.Data.AssignSelected.Id,
                     ColorId: Global.Data.AssignSelected.ColorId,
                     SizeId: Global.Data.AssignSelected.SizeId,
@@ -885,6 +887,7 @@ GPRO.Receipt = function () {
             $('#price').val('1');
             $('#pricecm').val('1');
             $('#pricecat').val('1');
+            $('#hieuxuat').val(100)
             var now = moment(new Date());
             $('#date-in').datepicker('setDate', now.format("DD/MM/YYYY"));
 
@@ -901,8 +904,8 @@ GPRO.Receipt = function () {
             M.updateTextFields();
         });
 
-        $('#' + Global.Element.popupAssignId + ' #btnNhap').click(function () { 
-            NhapKH($('#line-id').val(), $('#slkh').val(), Global.Data.AssignSelected.ProductId);
+        $('#' + Global.Element.popupAssignId + ' #btnNhap').click(function () {
+            NhapKH($('#line-id').val(), $('#slkh').val(), Global.Data.AssignSelected.ProductId, parseFloat( $('#hieuxuat').val()));
         });
 
 
@@ -963,11 +966,12 @@ GPRO.Receipt = function () {
         });
     }
 
-    function NhapKH(machuyen, slkh, masp) {
+    function NhapKH(machuyen, slkh, masp, hieuxuat) {
         $.ajax({
             url: Global.UrlAction.nhapKH,
             type: 'POST',
-            data: JSON.stringify({ 'machuyen': machuyen, 'sanluong': slkh, 'masp': masp }),
+            data: JSON.stringify({
+                'machuyen': machuyen, 'sanluong': slkh, 'masp': masp,'hieuxuat':hieuxuat }),
             contentType: 'application/json charset=utf-8',
             beforeSend: function () { $('.progress').removeClass('hide'); },
             success: function (response) {
@@ -980,7 +984,8 @@ GPRO.Receipt = function () {
                             <li> Ngày vào chuyền dự kiến : <span class="red-text bold"> ${moment(response.NgayBatDau).format("DD/MM/YYYY")} </span></li> 
                             <li> Lao động định biên :  <span class="red-text bold"> ${response.LaoDongDB} </span>LĐ</li>  
                             <li> Thời gian làm việc :  <span class="red-text bold"> ${response.ThoiGianLV} </span></li>  
-                            <li> Định mức ngày :  <span class="red-text bold"> ${response.DinhMucNgay} </span>  </li>  
+                            <li> Định mức ngày (100% hiệu xuất):  <span class="red-text bold"> ${response.DinhMucNgay} </span>  </li>  
+                            <li> Định mức ngày theo hiệu xuất DK :  <span class="red-text bold"> ${response.DinhMucNgayTheoHS} </span>  </li>  
                             <li> Sản lượng phân công :  <span class="red-text bold"> ${response.SanLuongKeHoach} </span></li>  
                             <li> Tổng số ngày sản xuất dự kiến :  <span class="red-text bold"> ${response.SoNgaySX} </span>ngày</li>  
                             <li> Ngày kết thúc dự kiến (khấu trừ ngày CN) :  <span class="red-text bold"> ${moment(response.NgayKetThuc).format("DD/MM/YYYY") } </span></li >  

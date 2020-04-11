@@ -3,13 +3,26 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MaterializeLayout.cshtml";
 }
-<br /> 
+<br />
+<div class="row">
+    <div class="col m12" style="padding-bottom:10px">
+        <button id="btn-excel-1" class=" waves-light btn ">Xuất kế hoạch sản xuất hiện tại các chuyền</button>
+    </div>
+    <div class="col m12">
+        <button id="btn-excel-2" class=" waves-light btn ">Xuất định mức kế hoạch sản xuất hiện tại các chuyền</button>
+    </div>
+</div>
 
-<button id="btnSave" class=" waves-light btn ">Xuất kế hoạch sản xuất hiện tại các chuyền</button>
-<button id="btnNhap" class=" waves-light btn ">Nháp kế hoạch sản xuất </button>
+
+
+
+@*<button id="btnNhap" class=" waves-light btn ">Nháp kế hoạch sản xuất </button>*@
 <br />
 <script>
-    $('#btnSave').click(() => {
-        window.location.href = '/export/Excel';
+    $('#btn-excel-1').click(() => {
+        window.location.href = '/export/Excel?type=1';
+    });
+    $('#btn-excel-2').click(() => {
+        window.location.href = '/export/Excel?type=2';
     });
 </script>
